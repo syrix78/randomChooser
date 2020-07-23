@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+	<title>My desk app 0.0.1</title>
+</head>
+ 
+<body>
+	<main class="content-wraper" id="content-wraper">
+    	<div class="content-blk">
+        <button id="loadnewdev">choose a dev</button>
+      </div>
+      <p id="message"></p>
+      <img id="img" src="imgs/pi.png" alt="devs" style="height:200px;" >
+	</main>
+ 
+	<!-- Insert this line above script imports  -->
+   <script>if (typeof module === 'object') {window.module = module; module = undefined;}
+   </script>
+	<!-- normal script imports etc  -->
+ 
+	<!-- Insert this line after script imports -->
+  <script>
+  if (window.module) module = window.module;
+  </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+      // include the ipc module to communicate with main process.
+      const ipcRenderer = require('electron').ipcRenderer; 
+
+      let devList = ["daphne", "babacar", "talla", "sophie", "mathieu", "patrick", "tamar", "jake", "etienne"];
+      
+      const btnclick = document.getElementById('loadnewdev');
+      btnclick.addEventListener('click', function () {
+        var i = Math.floor(Math.random()*devList.length);
+        console.log(i);
+        var arg = devList[i];
+        devList.splice(i,1);
+        console.log(arg);
+        
+        //send the info to main process . we can pass any arguments as second param.
+        ipcRenderer.send("btnclick", arg); // ipcRender.send will pass the information to main process
+      });
+      
+      //ipcRenderer.on will receive the “btnclick-task-finished'” info from main process 
+      ipcRenderer.on('btnclick-task-finished', function(event,param) {
+        console.log("received! " + param);
+        if (param) {
+          document.getElementById("message").innerHTML= param;
+          document.getElementById("img").src = "imgs/" + param + ".png";            
+        } else {
+          document.getElementById("message").innerHTML= "fini!! bonne aprem ! ";
+          document.getElementById("img").src = "imgs/doge.png";          
+        }
+      });
+
+	</script>
+</body>
+</html>
