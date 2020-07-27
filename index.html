@@ -3,14 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+  <link id="theme-toggle" rel="stylesheet" type="text/css" href="theme.css"></link>
 	<title>My desk app 0.0.1</title>
 </head>
  
 <body>
 	<main class="content-wraper" id="content-wraper">
     	<div class="content-blk">
-        <button id="loadnewdev">choose a dev</button>
+        <button id="loadnewdev">Choose a Dev</button>
+        <label class="toggleEdilex">
+          <input id="edilex-toggle" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <label id="edilex-toggle-label" for="edilex-toggle">Switch to Edilex Mode</label>
       </div>
       <p id="message"></p>
       <img id="img" src="imgs/pi.png" alt="devs" style="height:200px;" >
@@ -31,7 +37,7 @@
       // include the ipc module to communicate with main process.
       const ipcRenderer = require('electron').ipcRenderer; 
 
-      let devList = ["daphne", "babacar", "talla", "sophie", "mathieu", "patrick", "tamar", "jake", "etienne"];
+      let devList = ["Daphné", "Babacar", "Talla", "Sophie", "Mathieu", "Patrick", "Tamar", "Jake", "Étienne"];
       
       const btnclick = document.getElementById('loadnewdev');
       btnclick.addEventListener('click', function () {
@@ -43,6 +49,24 @@
         
         //send the info to main process . we can pass any arguments as second param.
         ipcRenderer.send("btnclick", arg); // ipcRender.send will pass the information to main process
+      });
+
+      const edilexToggle = document.getElementById("edilex-toggle");
+      // Stores the user's theme preference in local storage so it's persisted for next app launch.
+      const localTheme = localStorage.getItem("theme");
+      if (localTheme === "edilex") {
+        document.body.classList.toggle("edilex");
+        edilexToggle.setAttribute("checked", "true");
+      }
+
+      edilexToggle.addEventListener("change", () => {
+        document.body.classList.toggle("edilex");
+        const isToggledEdilex = document.body.classList.contains("edilex") ? true : false;
+
+        const edilexLabel = document.getElementById("edilex-toggle-label");
+        isToggledEdilex ? edilexLabel.innerText = "Switch to Default Mode" : edilexLabel.innerText = "Switch to Edilex Mode";
+
+        localStorage.setItem("theme", isToggledEdilex ? "edilex" : "");
       });
       
       //ipcRenderer.on will receive the “btnclick-task-finished'” info from main process 
@@ -56,7 +80,6 @@
           document.getElementById("img").src = "imgs/doge.png";          
         }
       });
-
 	</script>
 </body>
 </html>
