@@ -20,6 +20,23 @@
       </div>
       <p id="message"></p>
       <img id="img" src="imgs/pi.png" alt="devs" style="height:200px;" >
+      <div class="wrapper">
+        <div class="time">
+          <span id="minutes">00</span>
+          :
+          <span id="seconds">00</span>
+        </div>
+        <div class="controls">
+            <button id="reset">Reset</button>
+            <button id="action">Start</button><hr>
+            Timer : <br>
+            <label>
+              Minutes
+              <input id="minutesAlarm" type="number" value="0" min="0" />
+            </label>
+            <button id="alarm-set" >Set</button>
+        </div>
+      </div>
 	</main>
  
 	<!-- Insert this line above script imports  -->
@@ -32,54 +49,6 @@
   if (window.module) module = window.module;
   </script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script type="text/javascript">
-
-      // include the ipc module to communicate with main process.
-      const ipcRenderer = require('electron').ipcRenderer; 
-
-      let devList = ["Daphné", "Babacar", "Talla", "Sophie", "Mathieu", "Patrick", "Tamar", "Jake", "Étienne"];
-      
-      const btnclick = document.getElementById('loadnewdev');
-      btnclick.addEventListener('click', function () {
-        var i = Math.floor(Math.random()*devList.length);
-        console.log(i);
-        var arg = devList[i];
-        devList.splice(i,1);
-        console.log(arg);
-        
-        //send the info to main process . we can pass any arguments as second param.
-        ipcRenderer.send("btnclick", arg); // ipcRender.send will pass the information to main process
-      });
-
-      const edilexToggle = document.getElementById("edilex-toggle");
-      // Stores the user's theme preference in local storage so it's persisted for next app launch.
-      const localTheme = localStorage.getItem("theme");
-      if (localTheme === "edilex") {
-        document.body.classList.toggle("edilex");
-        edilexToggle.setAttribute("checked", "true");
-      }
-
-      edilexToggle.addEventListener("change", () => {
-        document.body.classList.toggle("edilex");
-        const isToggledEdilex = document.body.classList.contains("edilex") ? true : false;
-
-        const edilexLabel = document.getElementById("edilex-toggle-label");
-        isToggledEdilex ? edilexLabel.innerText = "Switch to Default Mode" : edilexLabel.innerText = "Switch to Edilex Mode";
-
-        localStorage.setItem("theme", isToggledEdilex ? "edilex" : "");
-      });
-      
-      //ipcRenderer.on will receive the “btnclick-task-finished'” info from main process 
-      ipcRenderer.on('btnclick-task-finished', function(event,param) {
-        console.log("received! " + param);
-        if (param) {
-          document.getElementById("message").innerHTML= param;
-          document.getElementById("img").src = "imgs/" + param + ".png";            
-        } else {
-          document.getElementById("message").innerHTML= "fini!! bonne aprem ! ";
-          document.getElementById("img").src = "imgs/doge.png";          
-        }
-      });
-	</script>
+  <script src="app.js"></script>
 </body>
 </html>
