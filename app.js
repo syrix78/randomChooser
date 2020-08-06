@@ -1,3 +1,9 @@
+const notifier = require("node-notifier");
+
+var onError = function(err,response){
+    console.error(err,response);
+};
+
 /* global document, setInterval, clearInterval */
 var startTime = null;
 const secondsInMinute = 60;
@@ -71,6 +77,20 @@ function setTime(m, s) {
     seconds.innerText = getString(s);
 
     if ( Number(minutes.innerText,10) == alarm ) {
+        notifier.notify({
+            message: "The time is up!",
+            title: "Random Chooser Time UP !!!",
+            // Special sound
+            // Case Sensitive string for location of sound file, or use one of OS X's native sounds
+            // Only Notification Center or Windows Toasters
+            sound: true,//"Bottle",
+            // The absolute path to the icon of the message
+            // (doesn't work on balloons) 
+            // If not found, a system icon will be shown
+            icon : "C:/images/ocw-logo.png",
+           // Wait with callback (onClick event of the toast), until user action is taken against notification
+            wait:true
+        },onError);
         window.alert("FINISH!");
         console.log("FINISH!");
         onReset();

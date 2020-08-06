@@ -1,6 +1,6 @@
 {
   "name": "randomChooser",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
@@ -20,5 +20,8 @@
     "electron": "^9.1.1",
     "electron-builder": "^22.8.0",
     "electron-packager": "^15.0.0"
+  },
+  "dependencies": {
+    "node-notifier": "^7.0.2"
   }
 }
