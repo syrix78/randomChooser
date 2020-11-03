@@ -154,7 +154,8 @@ function stopTimer(){
 // include the ipc module to communicate with main process.
 const ipcRenderer = require('electron').ipcRenderer;
 
-let devList = ["Daphné", "Babacar", "Talla", "Sophie", "Mathieu", "Patrick", "Tamar", "Jake", "Étienne"];
+//let devList2 = localStorage.getItem("teamList");
+let devList = ["Daphne", "Babacar", "Sophie", "Mathieu", "Patrick", "Tamar", "Jake", "Etienne"];
 
 const btnclick = document.getElementById('loadnewdev');
 btnclick.addEventListener('click', function () {
@@ -192,9 +193,9 @@ ipcRenderer.on('btnclick-task-finished', function(event,param) {
   console.log("received! " + param);
   if (param) {
     document.getElementById("message").innerHTML= param;
-    document.getElementById("img").src = "imgs/" + param + ".png";            
+    document.getElementById("img").src = "imgs/" + param.toLowerCase() + ".png";            
   } else {
     document.getElementById("message").innerHTML= "fini!! bonne aprem ! ";
-    document.getElementById("img").src = "imgs/doge.png";          
+    document.getElementById("img").src = "imgs/kung-fury-power-glove.jpg";          
   }
 });
