@@ -1,3 +1,12 @@
+## a scrum simple utilitary to randomly choose between user.
+It has been made super fast, code is ugly, but it does what it has to do.
+I am developping a new one using Angular + electron + material.js , but it is not finished.
+You can participate to development of the new one at [this address](https://www.github.com/mathieu2em/scrumRandomChooser)
+
+
+![image](https://user-images.githubusercontent.com/35858630/105535474-e9242800-5cbc-11eb-9e47-3bf1c8849d60.png)
+
+
 # electron-quick-start
 
 **Clone and run for a quick way to see Electron in action.**
