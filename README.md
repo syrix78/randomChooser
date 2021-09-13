@@ -1,5 +1,6 @@
 ## a scrum simple utilitary to randomly choose between user.
 It has been made super fast, code is ugly, but it does what it has to do.
+
 I am developping a new one using Angular + electron + material.js , but it is not finished.
 You can participate to development of the new one at [this address](https://www.github.com/mathieu2em/scrumRandomChooser)
 
@@ -59,3 +60,4 @@ I suggest using
 ```
 yarn dist
 ```
+# slackRandomChooser
