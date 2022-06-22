@@ -21,6 +21,7 @@ function createWindow () {
 	width : 400,
 	height: 540,
 	frame: true,
+  icon: __dirname + '/build/icon.ico',
 	webPreferences: {
     	webSecurity: false,
       plugins: true,
