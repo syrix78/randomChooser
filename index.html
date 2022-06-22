@@ -4,22 +4,22 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link id="theme-toggle" rel="stylesheet" type="text/css" href="theme.css"></link>
 	<title>random Chooser</title>
 </head>
  
 <body>
 	<main class="content-wraper" id="content-wraper">
-    	<div class="content-blk">
-        <button id="loadnewdev">Choose a Dev</button>
-        <label class="toggleEdilex">
-          <input id="edilex-toggle" type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        <label id="edilex-toggle-label" for="edilex-toggle">Switch to Edilex Mode</label>
+    	<div class="content-blk" >
+        <button id="loadnewdev" type="button" class="btn btn-light btn-sm">Choose a Dev</button>
+        <div class="form-check form-switch toggleEdilex">
+          <input id="edilex-toggle" type="checkbox" class="form-check-input">
+          <label id="edilex-toggle-label" for="edilex-toggle" class="form-check-label">Switch to Edilex Mode</label>
+        </div>
       </div>
-      <p id="message"></p>
       <img id="img" src="imgs/pi.jpg" alt="devs" style="height:200px;" >
+      <p id="message" class="fs-4 message"></p>
       <div class="wrapper">
         <div class="time">
           <span id="minutes">00</span>
@@ -27,14 +27,15 @@
           <span id="seconds">00</span>
         </div>
         <div class="controls">
-            <button id="reset">Reset</button>
-            <button id="action">Start</button><hr>
-            Timer : <br>
-            <label>
-              Minutes
-              <input id="minutesAlarm" type="number" value="0" min="0" />
-            </label>
-            <button id="alarm-set" >Set</button>
+          <!--<button id="reset">Reset</button>-->
+          <button id="reset" type="button" class="btn btn-light btn-sm">Reset</button>
+          <button id="action" type="button" class="btn btn-light btn-sm">Start</button><hr>
+          Timer : <br>
+          <label class="align-bottom">
+            Minutes
+            <input id="minutesAlarm" type="number" class="form-control" value="0" min="0" />
+          </label>
+          <button id="alarm-set" type="button" class="btn btn-light">Set</button>
         </div>
       </div>
 	</main>

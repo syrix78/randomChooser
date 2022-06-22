@@ -1,3 +1,5 @@
+const fs = require('fs');
+const bootstrap = require('bootstrap');
 const notifier = require("node-notifier");
 
 var onError = function(err,response){
@@ -86,8 +88,8 @@ function setTime(m, s) {
             sound: true,//"Bottle",
             // The absolute path to the icon of the message
             // (doesn't work on balloons) 
-            // If not found, a system icon will be shown
-            icon : "C:/images/ocw-logo.png",
+            // If not found, an icon will be shown
+            icon : "./build/icon.ico",
            // Wait with callback (onClick event of the toast), until user action is taken against notification
             wait:true
         },onError);
@@ -155,7 +157,8 @@ function stopTimer(){
 const ipcRenderer = require('electron').ipcRenderer;
 
 //let devList2 = localStorage.getItem("teamList");
-let devList = ["Daphne", "Babacar", "Sophie", "Mathieu", "Patrick", "Tamar", "Jake", "Etienne"];
+let rawdata = fs.readFileSync('teamlist.json');
+let devList = JSON.parse(rawdata)["users"];
 
 const btnclick = document.getElementById('loadnewdev');
 btnclick.addEventListener('click', function () {
@@ -196,6 +199,6 @@ ipcRenderer.on('btnclick-task-finished', function(event,param) {
     document.getElementById("img").src = "imgs/" + param.toLowerCase() + ".png";            
   } else {
     document.getElementById("message").innerHTML= "fini!! bonne aprem ! ";
-    document.getElementById("img").src = "imgs/kung-fury-power-glove.jpg";          
+    document.getElementById("img").src = "imgs/lets-code.jpg";          
   }
 });
